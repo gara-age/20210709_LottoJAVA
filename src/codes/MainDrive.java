@@ -42,10 +42,31 @@ public class MainDrive {
 			}
 
 		}
+//		당첨번호를 작은숫자에서 큰숫자 순서대로 정리해서 출력
+		
+//		정리 코드
+//		숫자 2개씩 비교해서 자리 바꾸는 반복=> 작은반복(분침)
+//		6번 반복 => 큰 반복(시침)
+		
+		for(int i =0; i < winLottoNumbers.length; i++) {
+			for(int j =0; j < winLottoNumbers.length -1; j++) {
+//				앞의 숫자보다 뒤의 숫자가 더 작으면 둘의 자리를 바꿔주자
+				if(winLottoNumbers[j] > winLottoNumbers[j+1]) {
+//					둘의 자리를 바꿔주자
+					int backUp = winLottoNumbers[j+1];
+					winLottoNumbers[j+1] = winLottoNumbers[j];
+					winLottoNumbers[j] = backUp;
+				}
+			}
+		}
+		
+//		출력은 OK
 		for(int num : winLottoNumbers) {
 			System.out.println(num);
 		}
 
+		
+		
 //		보너스 번호를 뽑아보자=> 1~45(당첨번호와 겹치면 안됨)
 		int bonusNum = 0;
 		
@@ -68,7 +89,7 @@ public class MainDrive {
 			}
 		}
 		
-		
+		System.out.println(bonusNum + "보너스 번호 ");
 		
 		
 		int[] myLottoNumbers = new int[6];
@@ -150,7 +171,7 @@ public class MainDrive {
 				}
 			}
 		}
-
+		
 //		최종 결과 : 맞춘 갯수가 저장됨
 //		 이 갯수가 몇개냐에 따라 등수를 정해주자
 		if(correctNumCount == 6) {
