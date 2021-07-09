@@ -42,10 +42,35 @@ public class MainDrive {
 			}
 
 		}
-//		for(int num : winLottoNumbers) {
-//			System.out.println(num);
-//		}
+		for(int num : winLottoNumbers) {
+			System.out.println(num);
+		}
 
+//		보너스 번호를 뽑아보자=> 1~45(당첨번호와 겹치면 안됨)
+		int bonusNum = 0;
+		
+		while(true) {
+//			보너스 번호 제대로 뽑힐때까지 반복
+			
+			int randomNum = (int) (Math.random() * 45 + 1);
+			
+			boolean isDuplOk = true;
+			
+			for(int winNum : winLottoNumbers) {
+				if(randomNum == winNum) {
+					isDuplOk = false;
+					break;
+				}
+			}
+			if(isDuplOk) {
+				bonusNum = randomNum;
+				break;
+			}
+		}
+		
+		
+		
+		
 		int[] myLottoNumbers = new int[6];
 
 //		숫자 6개 => 내 로또 번호를 입력받기 위한 for문.
