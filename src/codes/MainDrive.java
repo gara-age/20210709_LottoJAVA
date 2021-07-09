@@ -5,93 +5,7 @@ import java.util.Scanner;
 public class MainDrive {
 
 	public static void main(String[] args) {
-		
 
-//		컴퓨터가 6개의 랜덤 숫자를 뽑아서 => 이번주 당첨번호를 추첨.
-
-		int[] winLottoNumbers = new int[6];
-
-//		6개의 숫자를 넣기 위한 for
-
-		for (int i = 0; i < winLottoNumbers.length; i++) {
-
-//			중복검사 통과하는 숫자를 뽑을때까지 무한반복.
-
-			while (true) {
-				
-//			컴퓨터가 랜덤 숫자 제시 => 1~45 사이의 숫자를 랜덤으로 추출 : 범위검사는 필요가 없다.
-
-				int randomNum = (int) (Math.random() * 45 + 1);
-
-//			중복검사 만 해도 되겠다.
-				boolean isDuplOk = true;
-
-				for (int num : winLottoNumbers) {
-					if (num == randomNum) {
-						isDuplOk = false;
-						break;
-					}
-				}
-
-//			중복검사만 통과했어도 배열에 넣어도 된다.
-
-				if (isDuplOk) {
-					winLottoNumbers[i] = randomNum;
-					break;
-				}
-			}
-
-		}
-//		당첨번호를 작은숫자에서 큰숫자 순서대로 정리해서 출력
-		
-//		정리 코드
-//		숫자 2개씩 비교해서 자리 바꾸는 반복=> 작은반복(분침)
-//		6번 반복 => 큰 반복(시침)
-		
-		for(int i =0; i < winLottoNumbers.length; i++) {
-			for(int j =0; j < winLottoNumbers.length -1; j++) {
-//				앞의 숫자보다 뒤의 숫자가 더 작으면 둘의 자리를 바꿔주자
-				if(winLottoNumbers[j] > winLottoNumbers[j+1]) {
-//					둘의 자리를 바꿔주자
-					int backUp = winLottoNumbers[j+1];
-					winLottoNumbers[j+1] = winLottoNumbers[j];
-					winLottoNumbers[j] = backUp;
-				}
-			}
-		}
-		
-//		출력은 OK
-		for(int num : winLottoNumbers) {
-			System.out.println(num);
-		}
-
-		
-		
-//		보너스 번호를 뽑아보자=> 1~45(당첨번호와 겹치면 안됨)
-		int bonusNum = 0;
-		
-		while(true) {
-//			보너스 번호 제대로 뽑힐때까지 반복
-			
-			int randomNum = (int) (Math.random() * 45 + 1);
-			
-			boolean isDuplOk = true;
-			
-			for(int winNum : winLottoNumbers) {
-				if(randomNum == winNum) {
-					isDuplOk = false;
-					break;
-				}
-			}
-			if(isDuplOk) {
-				bonusNum = randomNum;
-				break;
-			}
-		}
-		
-		System.out.println(bonusNum + "보너스 번호 ");
-		
-		
 		int[] myLottoNumbers = new int[6];
 
 //		숫자 6개 => 내 로또 번호를 입력받기 위한 for문.
@@ -155,54 +69,43 @@ public class MainDrive {
 
 		}
 
-//		등수 판단 => 내 번호 / 당첨번호 비교 =>몇개를 맞췄나 (같은 숫자가 몇개있는가)
-//		숫자 야구게임과의 비교 : 야구 - 위치도 판단요소 / 로또 - 위치는 상관없음 
-		
-//		몇개의 숫자를 맞췄는지 기록할 변수
-		int correctNumCount = 0;
-		
-		
-		for(int myNum : myLottoNumbers) {
-//			당첨번호도 하나씩 꺼내보자 => 내 번호랑 계속 같은지 비교
-			for(int winNum : winLottoNumbers) {
-				if(myNum == winNum) {
-//					같은 숫자를 찾았다면 맞춘 갯수 하나 증가
-					correctNumCount++;
+//		컴퓨터가 6개의 랜덤 숫자를 뽑아서 => 이번주 당첨번호를 추첨.
+
+		int[] winLottoNumbers = new int[6];
+
+//		6개의 숫자를 넣기 위한 for
+
+		for (int i = 0; i < winLottoNumbers.length; i++) {
+
+//			중복검사 통과하는 숫자를 뽑을때까지 무한반복.
+
+			while (true) {
+				
+//			컴퓨터가 랜덤 숫자 제시 => 1~45 사이의 숫자를 랜덤으로 추출 : 범위검사는 필요가 없다.
+
+				int randomNum = (int) (Math.random() * 45 + 1);
+
+//			중복검사 만 해도 되겠다.
+				boolean isDuplOk = true;
+
+				for (int num : winLottoNumbers) {
+					if (num == randomNum) {
+						isDuplOk = false;
+						break;
+					}
+				}
+
+//			중복검사만 통과했어도 배열에 넣어도 된다.
+
+				if (isDuplOk) {
+					winLottoNumbers[i] = randomNum;
+					break;
 				}
 			}
+
 		}
-		
-//		최종 결과 : 맞춘 갯수가 저장됨
-//		 이 갯수가 몇개냐에 따라 등수를 정해주자
-		if(correctNumCount == 6) {
-			System.out.println("1등");
-		}
-		else if(correctNumCount == 5) {
-			
-//			내 입력값과 보너스 번호가 같은게 있다면 2등
-//			하나도 없다면 3등
-			boolean isBonusCorrect = false;
-			for(int myNum : myLottoNumbers) {
-				if(myNum == bonusNum) {
-					isBonusCorrect = true;
-				}
-				if(isBonusCorrect) {
-					System.out.println("2등");
-				}
-				else {
-					System.out.println("3등");
-				}
-			}
-			
-		}
-		else if(correctNumCount == 4) {
-			System.out.println("4등");
-		}
-		else if(correctNumCount == 3) {
-			System.out.println("5등");
-		}
-		else {
-			System.out.println("낙첨");
+		for ( int num : winLottoNumbers) {
+			System.out.println(num);
 		}
 	}
 
