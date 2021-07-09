@@ -104,7 +104,9 @@ public class MainDrive {
 			}
 
 		}
-
+		for ( int num : winLottoNumbers) {
+			System.out.println(num);
+		}
 	}
 
 }
